@@ -5,25 +5,25 @@ spring:
         locator:
           enabled: true
       routes:
-      - id: serviceA
-        uri: lb://service-A
+      - id: payment
+        uri: lb://payment
         predicates:
-        - Path=/srva/**
+        - Path=/pay/**
         filters:
-        - RewritePath=/srva/(?<segment>.*), /$\{segment}
+        - RewritePath=/pay/(?<segment>.*), /$\{segment}
         - name: Hystrix
           args:
-            name: monitor-srvA
+            name: monitor-pay
             fallbackUri: forward:/fallback/serviceA
-      - id: ServiceB
-        uri: lb://service-B
+      - id: tax
+        uri: lb://tax
         predicates:
-        - Path=/srvb/**
+        - Path=/tax/**
         filters:
-        - RewritePath=/srvb/(?<segment>.*), /$\{segment}
+        - RewritePath=/tax/(?<segment>.*), /$\{segment}
         - name: Hystrix
           args:
-            name: monitor-srvB
+            name: monitor-tax
             fallbackUri: forward:/fallback/serviceB  
       - id: MQActivityService
         uri: lb://activity
