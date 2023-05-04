@@ -11,20 +11,12 @@ spring:
         - Path=/pay/**
         filters:
         - RewritePath=/pay/(?<segment>.*), /$\{segment}
-        - name: Hystrix
-          args:
-            name: monitor-pay
-            fallbackUri: forward:/fallback/serviceA
       - id: tax
         uri: lb://tax
         predicates:
         - Path=/tax/**
         filters:
         - RewritePath=/tax/(?<segment>.*), /$\{segment}
-        - name: Hystrix
-          args:
-            name: monitor-tax
-            fallbackUri: forward:/fallback/serviceB  
       - id: MQActivityService
         uri: lb://activity
         predicates:
@@ -44,5 +36,5 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream, info, health
+        include: info, health
      
