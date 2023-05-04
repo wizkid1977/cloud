@@ -1,11 +1,11 @@
 server:
-  port: 8001
+  port: 8010
   
 spring:
   cloud:
     consul:
       discovery:
-        instanceId: ServiceA
+        instanceId: Payment
         health-check-interval: 5s
       config:
         management: 
