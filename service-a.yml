@@ -4,8 +4,9 @@ server:
 spring:
   cloud:
     consul:
+      host: consul
       discovery:
-        instanceId: Payment
+        instanceId: service-a
         health-check-interval: 5s
       config:
         management: 
