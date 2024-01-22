@@ -6,24 +6,19 @@ spring:
           enabled: true
       routes:
       - id: payment
-        uri: lb://payment
+        uri: lb://service-a
         predicates:
-        - Path=/pay/**
+        - Path=/srva/**
         filters:
-        - RewritePath=/pay/(?<segment>.*), /$\{segment}
+        - RewritePath=/srva/(?<segment>.*), /$\{segment}
       - id: tax
-        uri: lb://tax
+        uri: lb://service-b
         predicates:
-        - Path=/tax/**
+        - Path=/srvb/**
         filters:
-        - RewritePath=/tax/(?<segment>.*), /$\{segment}
-      - id: MQActivityService
-        uri: lb://activity
-        predicates:
-        - Path=/act/**
-        filters:
-        - RewritePath=/act/(?<segment>.*), /$\{segment} 
+        - RewritePath=/srvb/(?<segment>.*), /$\{segment}
     consul:
+      host: consul
       discovery:
         instanceId: Gateway
         health-check-interval: 5s
